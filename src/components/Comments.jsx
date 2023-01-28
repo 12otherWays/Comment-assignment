@@ -4,9 +4,8 @@ import {
   createComment,
   deleteComment as deleteSingleComment,
   updateComment as updateCommentApi,
-  
   updateUpvote,
-  updateDownvote,
+  // updateDownvote,
 } from "../api";
 import SingleComment from "./SingleComment";
 import CommentForm from "./CommentForm";
@@ -81,9 +80,11 @@ function Comments({ currentUserId }) {
   }, []);
 
   return (
-    <div className="comments bg-slate-500">
-      <h3 className=" text-3xl font-bold underline comments-title">Comments</h3>
-      <div className="comment-form-title">Write comment</div>
+    <div className="mt-0">
+      <h3 className="font-medium leading-tight text-5xl my-4 text-blue-600">
+        Comments
+      </h3>
+      <div className="text-2xl">Write comment</div>
       <CommentForm submitLabel="Comment" handleSubmit={addComment} />
       <div className="co">
         {parentComment.map((childComment) => {

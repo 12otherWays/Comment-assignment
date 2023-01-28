@@ -20,19 +20,36 @@ function CommentForm({
       <form onSubmit={onSubmit}>
         <textarea
           name="form"
-          cols="30"
-          rows="10"
-          className="comment-form-textarea"
+          rows="4"
+          className="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        my-6
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          placeholder="Your comment"
         />
-        <button className="comment-form-button" disabled={btnDisable}>
+        <button
+          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mb-4"
+          disabled={btnDisable}
+        >
           {submitLabel}
         </button>
         {hasCancelButton && (
           <button
             type="button"
-            className="comment-form-button comment-form-cancel-button"
+            className=" inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-4"
             onClick={handleCancel}
           >
             Cancel
