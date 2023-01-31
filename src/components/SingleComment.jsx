@@ -1,4 +1,7 @@
 import CommentForm from "./CommentForm";
+import { FaReplyAll } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { BiUpvote, BiDownvote, BiEdit } from "react-icons/bi";
 
 function SingleComment({
   comment,
@@ -10,7 +13,6 @@ function SingleComment({
   activeComment,
   setActiveComment,
   parentId = null,
-
   upvote,
   downvote,
   setUpvote,
@@ -30,7 +32,7 @@ function SingleComment({
   const createdAt = new Date(comment.createdAt).toLocaleDateString();
 
   return (
-    <div key={comment.id} className="flex mb-4">
+    <div key={comment.id} className="flex mb-4 ">
       <div className="comment-image-container mr-3 mt-2">
         <img
           className="rounded-full h-12 w-12 object-cover"
@@ -40,7 +42,7 @@ function SingleComment({
       </div>
       <div className="w-full">
         <div className="flex items-center">
-          <div className="text-2xl mr-2 text-blue-600">{comment.username}</div>
+          <div className="text-2xl mr-2 text-blue-400">{comment.username}</div>
           <div className="text-xs">{createdAt}</div>
         </div>
         {!isEditing && <div className="comment-text">{comment.body}</div>}
@@ -53,36 +55,43 @@ function SingleComment({
             handleCancel={() => setActiveComment(null)}
           />
         )}
-        <div className=" font-medium">{comment.body}</div>
         <div className="flex text-xs mt-3 cursor-pointe ">
           <div
-            className="hover:underline text-emerald-600 mx-1"
+            className="hover:underline  text-blue-600 mx-2"
             onClick={() => {
               setActiveComment({ id: comment.id, type: "replying" });
             }}
           >
-            Reply
+            <FaReplyAll />
           </div>
           <div
-            className="hover:underline text-yellow-500 mx-1"
+            className="hover:underline  text-blue-600 mx-1"
             onClick={() => {
               setActiveComment({ id: comment.id, type: "editing" });
             }}
           >
-            Edit
+            <BiEdit />
           </div>
           <div
-            className="hover:underline text-red-700 mx-1"
+            className="hover:underline text-red-500 mx-1"
             onClick={() => deleteComment(comment.id)}
           >
-            Delete
+            <MdDelete />
           </div>
-          {/* <div onClick={(no) => setUpvote(no, comment.id)}>
-            &uarr; {comment.upvote}
+          <div
+            onClick={(text) => setUpvote(text.upvote, comment.id)}
+            className="flex justify-center align-middle mr-2"
+          >
+            <BiUpvote /> {comment.upvote}
           </div>
-          <div onClick={() => setDownvote(comment.id)}>
-            &darr; {comment.downvote}
-          </div> */}
+          <div
+            onClick={(text) => {
+              setDownvote(text.downvote, comment.id);
+            }}
+            className="flex justify-center align-middle mx-1"
+          >
+            <BiDownvote /> {comment.downvote}
+          </div>
         </div>
         {isReplying && (
           <CommentForm

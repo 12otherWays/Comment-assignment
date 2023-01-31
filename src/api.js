@@ -3,7 +3,7 @@ export const getComments = async () => {
     {
       id: "1",
       body: "First comment",
-      username: "Jack",
+      username: "Name 234",
       userId: "1",
       parentId: null,
       createdAt: "2021-08-16T23:00:33.010+02:00",
@@ -13,7 +13,7 @@ export const getComments = async () => {
     {
       id: "2",
       body: "Second comment",
-      username: "John",
+      username: "Jonas",
       userId: "2",
       parentId: null,
       createdAt: "2021-08-16T23:00:33.010+02:00",
@@ -23,7 +23,7 @@ export const getComments = async () => {
     {
       id: "3",
       body: "First comment first child",
-      username: "John",
+      username: "Name 123",
       userId: "2",
       parentId: "1",
       createdAt: "2021-08-16T23:00:33.010+02:00",
@@ -33,7 +33,7 @@ export const getComments = async () => {
     {
       id: "4",
       body: "Second comment second child",
-      username: "John",
+      username: "Reetu ",
       userId: "2",
       parentId: "2",
       createdAt: "2021-08-16T23:00:33.010+02:00",
@@ -64,10 +64,10 @@ export const deleteComment = async () => {
   return {};
 };
 
-export const updateUpvote = async (no) => {
-  return { no };
+export const updateUpvote = async (number) => {
+  return { number };
 };
 
-export const updateDownvote = async (no) => {
-  return { no };
+export const updateDownvote = async (number) => {
+  return { number };
 };

@@ -5,20 +5,23 @@ import {
   deleteComment as deleteSingleComment,
   updateComment as updateCommentApi,
   updateUpvote,
-  // updateDownvote,
+  updateDownvote,
 } from "../api";
 import SingleComment from "./SingleComment";
 import CommentForm from "./CommentForm";
 
 function Comments({ currentUserId }) {
+  // states
   const [allComments, setAllComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
-  const [upvote, setUpvote] = useState(5);
-  const [downvote, setDownvote] = useState(5);
+  // const [upvote, setUpvote] = useState(5);
+  // const [downvote, setDownvote] = useState(5);
 
+  // functions
   const parentComment = allComments.filter(
     (comment) => comment.parentId === null
   );
+
   const getReplies = (commentId) => {
     return allComments
       .filter((singleComment) => singleComment.parentId === commentId)
@@ -33,6 +36,16 @@ function Comments({ currentUserId }) {
       setActiveComment(null);
     });
   };
+  const deleteComment = (commentId) => {
+    if (window.confirm("Are you sure want to deleet comment?")) {
+      deleteSingleComment(commentId).then(() => {
+        const updateAllComments = allComments.filter(
+          (singleComment) => singleComment.id !== commentId
+        );
+        setAllComments(updateAllComments);
+      });
+    }
+  };
   const updateComment = (text, commentId) => {
     updateCommentApi(text).then(() => {
       const updatedAllComments = allComments.map((comment) => {
@@ -45,32 +58,29 @@ function Comments({ currentUserId }) {
       setActiveComment(null);
     });
   };
-
-  const deleteComment = (commentId) => {
-    if (window.confirm("Are you sure want to deleet comment?")) {
-      deleteSingleComment(commentId).then(() => {
-        const updateAllComments = allComments.filter(
-          (singleComment) => singleComment.id !== commentId
-        );
-        setAllComments(updateAllComments);
-      });
-    }
-  };
-
-  const upVote = (upvote, commentId) => {
-    updateUpvote(upvote).then(() => {
+  const upVote = (number, commentId) => {
+    updateUpvote(number).then(() => {
       const updatedAllComments = allComments.map((comment) => {
         if (comment.id === commentId) {
-          console.log(comment.id);
-          return { ...comment, upvote: upvote++ };
+          return { ...comment, upvote: ++comment.upvote };
         }
         return comment;
       });
       setAllComments(updatedAllComments);
       setActiveComment(null);
     });
-    // console.log(upvote);
-    // setUpvote(upvote++);
+  };
+  const downVote = (number, commentId) => {
+    updateDownvote(number).then(() => {
+      const updatedAllComments = allComments.map((comment) => {
+        if (comment.id === commentId) {
+          return { ...comment, downvote: --comment.downvote };
+        }
+        return comment;
+      });
+      setAllComments(updatedAllComments);
+      setActiveComment(null);
+    });
   };
 
   useEffect(() => {
@@ -99,10 +109,8 @@ function Comments({ currentUserId }) {
               setActiveComment={setActiveComment}
               addCommnet={addComment}
               updateComment={updateComment}
-              upvote={upvote}
-              downvote={downvote}
               setUpvote={upVote}
-              setDownvote={setDownvote}
+              setDownvote={downVote}
             />
           );
         })}

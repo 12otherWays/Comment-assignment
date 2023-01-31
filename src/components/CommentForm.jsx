@@ -17,15 +17,16 @@ function CommentForm({
   };
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={onSubmit}
+        className="flex my-3 justify-center align-middle"
+      >
         <textarea
           name="form"
-          rows="4"
           className="form-control
         block
         w-full
         px-3
-        py-1.5
         text-base
         font-normal
         text-gray-700
@@ -34,27 +35,28 @@ function CommentForm({
         rounded
         transition
         ease-in-out
-        my-6
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Your comment"
         />
-        <button
-          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mb-4"
-          disabled={btnDisable}
-        >
-          {submitLabel}
-        </button>
-        {hasCancelButton && (
+        <div className="flex justify-center align-middle">
           <button
-            type="button"
-            className=" inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-4"
-            onClick={handleCancel}
+            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mb-4 h-full ml-2"
+            disabled={btnDisable}
           >
-            Cancel
+            {submitLabel}
           </button>
-        )}
+          {hasCancelButton && (
+            <button
+              type="button"
+              className=" inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-4"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
     </>
   );
